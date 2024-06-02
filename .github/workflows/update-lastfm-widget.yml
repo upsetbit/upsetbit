@@ -1,0 +1,24 @@
+name: Update last.fm "now playing" widget
+
+on:
+  schedule:
+    # every 10 minutes
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+   update-lastfm-widget:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: >
+          docker run
+          --rm
+          -e LASTFM_USERNAME=${{ secrets.LASTFM_USERNAME }}
+          -e LASTFM_API_KEY=${{ secrets.LASTFM_API_KEY }}
+          -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+          -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          -e AWS_REGION=${{ secrets.AWS_REGION }}
+          caian/lastfm-widget-now-playing
