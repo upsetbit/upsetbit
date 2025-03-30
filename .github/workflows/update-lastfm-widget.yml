@@ -2,8 +2,8 @@ name: Update last.fm "now playing" widget
 
 on:
   schedule:
-    # every 10 minutes
-    - cron: '*/10 * * * *'
+    # every 30 minutes
+    - cron: '*/30 * * * *'
 
   workflow_dispatch:
 
